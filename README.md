@@ -1,14 +1,12 @@
-# Network-analytics
+# Applied Deep Learning
 
 ## Module overview
 
-Networks are ubiquitous: job offerings reach us via inter-personal connections; what we see on the screen of our digital device is a function of the relationships we develop in the digital world; market valuations are ― largely ― the byproduct of social influence, which accumulates and spreads over relations. This module provides students with cutting-edge network theories and practical tools to appreciate the organization and functioning of disparate networks. Ultimately, the goal is to develop a distinctive angle on how networks bring value to individuals, organizations, and communities.
+Deep Learning has become one of the most topical machine learning tools in the recent years, and relies on sophisticated algorithms and methodologies in order to analyze complex data. This module provides an introduction to both the tools and the applications of deep learning, with a particular focus on business contexts.
 
-## Learning objectives
+The topics covered include (but are not limited to):
 
-- appreciate the properties of networks;
-- appreciate the properties of communities of nodes belonging to a network;
-- appreciate the properties of individual nodes belonging to a network;
-- visually represent the key features of networks;
-- leverage the most advanced Python modules for network analytics;
-- mobilize key network analytics notions and tools in order to produce elegant, effective, and efficient solutions to practical problems in the field of business strategy, product innovation, and operations.
+- Basic terminology and theoretical concepts foundational to neural networks
+- Setting up industry standard programming environments
+- An overview of the main neural network architectures, with a particular focus on feedforward networks, deep convolutional networks, and recurrent neural networks
+- Key applications of deep learning in areas such as e-commerce and finance
