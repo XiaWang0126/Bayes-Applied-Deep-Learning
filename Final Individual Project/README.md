@@ -1,20 +1,31 @@
 # Final Individal Course Project
 
-## Project background
-The compound of technologies we use to call 'AI' promises to revolutionize many sectors. However, there is a substantial gap between what firms say they do with AI and what they actually do with it [1]. Several factors could account for such a gap: the adoption of AI tools is costly since it tends to jeopardize an incumbent's operations [2]; there is a shortage of human capital trained in the area of AI [3]; developing AI applcations may require businesses to cope with ethical/societal implications [4, 5] and regulatory issues [6]. In the context of knowledge intensive industries, there is yet another obstacle to the diffusion of AI, namely, 'professionals.' While some individuals may be thrilled to integrate AI in their daily work, some others may just feel threatened. This FCP deals with the distribution of security traders opinions about the impact AI can make on 'trading floors.'
+## Assignment overview
+In modern industrial applications, sensors are used to observe key machine characteristics. These can help detect slight deviations and issues to avoid major system failures through targeted repairs while keeping maintenance costs under control.
+Such sensors are critical in the operation of wind turbines. Due to fluctuating winds that can negatively impact the turbines and the high costs of maintenance, specifically for offshore turbines, sensor readings need to be reliably converted into an operating mode. That is, given the sensor readings over time, we want to know whether the turbine is operating correctly or whether one of several issues is present. If issues are detected (reliably), targeted efforts can be made to alleviate them before a major system failure occurs.
+Your task will be to predict, as accurately as possible, the operating mode of a wind turbine based on the time series data from two sensors.
 
-## Aim & context
-You're a 'quant' business analyst working for a consultancy company that has to help a client to sustain the diffusion of AI. Specifically, the client is a large investment bank that would like to persuade traders to engage more with AI tools when it comes evaluating securities.
+The data are sensor readings and operating modes for 4,000 turbine runs. time_series_1 and time_series_2 are NumPy arrays of shape (4000,5000). Each observation corresponds to 5,000 records of the turbine over time by one of the two sensors (time_series_1 measures the pitch angle in each second of operation, and time_series_2 measures the generator torque). y is the operating mode for each of the 4,000 turbine runs (0 if the turbine is healthy, 1 if the generator torque is faulty, 2 if the pitch angle is faulty, and 3 if both are faulty). Note that the dataset is balanced in that each operating mode is represented equally often.
 
-## Dataset
-In order to get a better understanding of traders' attitudes toward AI, you have circulated a survey in a large trading floor located in Canary Wharf. The resulting dataset (trading_floor.xml) contains 192 responses regarding:
+Throughout, you should use validation and test datasets consisting of 15% of the observations each. Make sure to use the same split of observations for all tasks.
 
-- the undirected network of knowledge exchange between traders (traders A and B are connected when A says he/she shares technical and industry knowledge with B and vice versa)
-- a trader's opinion about the contribution of AI to his/her productivity and effectiveness in evaluating securities (1 = not at all; 10 = to a great extent). In the datasets, this variable is reported as the node attribute ai.
-Thanks to the cooperation of the client, you also know the traders' location in the floor. There are six zones, each of which hosts 32 individuals (16 individuals on each side of the zone). The above-displayed picture gives you an idea of the layout of the trading floor. In the dataset, the location of traders is reported as two node attributes, that is, x-pos and y-pos.
+## Task Description
 
-## Questions
-1. How do traders' opinions map onto the knowledge exchange network?
-2. How do traders' opinions map onto the physical layout of the trading floor?
-3. What are the network-related obstacles to the diffusion of positive opinions about AI in the trading floor?
-4. What is your recommendation to promote the diffusion of positive opinions about AI in the trading floor?
+1. Create a recurrent neural network in TensorFlow to predict the operating mode of a wind turbine based on the two time series from the sensors. Before any implementation, carefully consider what type of approach (sequence-to-vector, sequence-to-sequence, or encoder-decoder) is most sensible here and how you need to manipulate the data, given that you have two different time series for each observation.
+ 
+Then, make sure that you try out the different layers and elements discussed in class, such as SimpleRNN, LSTM and Conv1D - while a certain amount of trial and error will be necessary, it is recommended that you tune your network systematically. Make sure to record your final validation set accuracy.
+
+Another tool for analyzing time-series data is convolutional neural networks with 2D convolutional layers. For this to work, time series need to be converted into “images” (matrices of numbers). The paper
+“Convolutional neural network fault classification based on time series analysis for benchmark wind turbine machine” by Rahimilarki, Gao, Jin, and Zhang (published 2022 in “Renewable Energy” and available through the City-library)
+describes how two-dimensional CNNs can be applied to the problem at hand. Consider sections 4 and 5 that depict the process of converting one or multiple time series into “images” used within a CNN.
+
+2. In your own words, explain why the approach outlined here can help analyze time-series data and why it might outperform RNNs.
+
+3. Convert the data for use with a CNN. In particular, following the approach outlined in Scenario 2 (section 5.3 of the paper) and summarized in Figure 18, convert the two time series corresponding to one wind turbine run into a single (100,100,1) array (i.e., a gray- scale image).
+
+4. In TensorFlow, replicate the CNN with three convolutional layers displayed in Figure 12 and train it on your data. Make sure to record your final validation set accuracy.
+
+5. Can you do better by adjusting the CNN? Be creative in your design choices (you might also consider pre-trained CNN architectures) and record your final validation set accuracy.
+
+6. Compare the models you have created so far (both RNNs and CNNs) and make a selection (making sure to justify this). Train that model on a combined training and validation set and evaluate it on your test set.
+
